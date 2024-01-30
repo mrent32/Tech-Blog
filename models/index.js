@@ -1,13 +1,35 @@
 import User from ('./User')
-import Project from ('./Proejct')
+import Post from ('./Post')
+import Comment from ('./Comment')
 
-User.hasMany(Project, {
+User.hasMany(Post, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
 })
 
-Project.belongsTo(User, {
+Post.belongsTo(User, {
     foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+
 })
 
-module.exports = { User, Project }
+Comment.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+})
+
+Comment.belongsTo(Post, {
+    foreignKey: 'post_id',
+    onDelete: 'CASCADE'
+})
+
+Post.hasMany(Comment, {
+    foreignKey: 'post_id',
+    onDelete: 'CASCADE',  
+})
+
+User.hasMany(Comment, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+})
+module.exports = { User, Post, Comment }
