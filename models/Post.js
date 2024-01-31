@@ -1,7 +1,7 @@
-import { Model, DataTypes } from ('sequelize')
-import sequelize from ('../config/connection')
+import { Model, DataTypes } from 'sequelize'
+import sequelize from '../config/connection.js'
 
-class Post extends Model {}
+export default class Post extends Model {}
 
 Post.init(
     {
@@ -39,4 +39,3 @@ Post.init(
     }
 )
 
-module.exports = Post

@@ -1,5 +1,5 @@
-import { Model, DataTypes } from ('sequelize');
-import sequelize from ('../config/connection');
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../config/connection.js';
 
 class Comment extends Model {}
 
@@ -44,4 +44,4 @@ Comment.init(
     }
 )
 
-module.exports = Comment;
+export default Comment

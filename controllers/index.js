@@ -1,8 +1,10 @@
-import router from ('express').Router()
-import apiRoutes from ('./api')
-import homeRoutes from ('./home-routes')
+import express from 'express'
+import apiRoutes from './api/index.js'
+import homeRoutes from './home-routes.js'
+const router = express.Router()
+
 
 router.use('/api', apiRoutes)
 router.use('/', homeRoutes)
 
-module.exports = router;
+export default router;

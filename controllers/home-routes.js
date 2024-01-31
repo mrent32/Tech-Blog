@@ -1,7 +1,9 @@
-import router from ('express').Router();
-import { Post, User, Comment } from ('../models');
-import withAuth from "../utils/withAuth";
-
+import express from 'express';
+import Post from '../models/Post.js'
+import User from '../models/User.js'
+import Comment from '../models/Comment.js'
+import withAuth from "../utils/withAuth.js";
+const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
@@ -12,7 +14,7 @@ router.get('/', async (req, res) => {
                 },
             ],
         })
-        const posts = postrData.map((post) => post.get({ plain: true}));
+        const posts = postData.map((post) => post.get({ plain: true}));
 
         res.render('homepage', {
             posts, 
@@ -48,9 +50,10 @@ router.get('/post/:id', withAuth, async (req, res) => {
 })
 
 router.get('/dashboard', withAuth, async (req, res) => {
-  try{  const postData = await Post.findAll({
+  try { 
+     const postData = await Post.findAll({
         where: { user_id: req.session.user_id },
-        include; [{ model: User, attributes: ['username'] }],
+        include: [{ model: User, attributes: ['username'] }],
     });
     const posts = postData.map((post) => post.get({ plain: true }))
 
@@ -101,4 +104,4 @@ router.get('/editpost/:id', async (req, res) => {
     }
 })
 
-module.exports = router;
+export default router;

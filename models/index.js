@@ -1,6 +1,9 @@
-import User from ('./User')
-import Post from ('./Post')
-import Comment from ('./Comment')
+import User from './User.js'
+import Post from './Post.js'
+import Comment from './Comment.js'
+
+
+
 
 User.hasMany(Post, {
     foreignKey: 'user_id',
@@ -23,6 +26,7 @@ Comment.belongsTo(Post, {
     onDelete: 'CASCADE'
 })
 
+
 Post.hasMany(Comment, {
     foreignKey: 'post_id',
     onDelete: 'CASCADE',  
@@ -32,4 +36,5 @@ User.hasMany(Comment, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
 })
-module.exports = { User, Post, Comment }
+
+export default Comment

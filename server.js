@@ -1,10 +1,12 @@
-import express from ('express');
-import session from ('express-session');
-import SequelizeStore from ('connect-session-sequelize')(session.Store)
-import routes from ('./controllers');
-import sequelize from ('./config/connection');
-import exphbs from ('express-handlebars');
-const hbs = exphbs.create({ helpers: require('./utils/')})
+import express from 'express';
+import session from 'express-session';
+import sequelizeStore from 'connect-session-sequelize';
+const SequelizeStore = sequelizeStore(session.Store)
+import routes from './controllers/index.js';
+
+import sequelize from './config/connection.js';
+import exphbs from 'express-handlebars';
+const hbs = exphbs.create()
 
 const app = express();
 const PORT = process.env.PORT || 3001
@@ -20,6 +22,7 @@ const sess = {
 }
 
 app.use(session(sess))
+app.use(express.json());
 app.use(express.urlencoded({ extended: true}))
 
 app.use(express.static('public'))
@@ -36,6 +39,6 @@ app.use(
 )
 
 app.use(routes);
-sequelize.sync({ force: false})/TouchEvent(() => {
+sequelize.sync({ force: false}).then(()  => {
     app.listen(PORT, () => console.log(`App listening at http://localhost:3001`))
 })
