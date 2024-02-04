@@ -6,21 +6,19 @@ import withAuth from "../utils/withAuth.js";
 const router = express.Router();
 router.get('/', async (req, res) => {
     try {
-        const postData = await Post.findAll({
-            include: [
-                {
-                    model: User,
-                    attributes: ['username'],
-                },
-            ],
-        })
+        const postData = await Post.findAll(
+            
+        )
+        console.log(postData)
         const posts = postData.map((post) => post.get({ plain: true}));
-
+        // const posts = []
         res.render('homepage', {
+        
             posts, 
             logged_in: req.session.logged_in
         })
     } catch (err) {
+        console.log(err)
         res.status(500).json(err)
     }
 })
@@ -49,7 +47,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
     }
 })
 
-router.get('/dashboard', withAuth, async (req, res) => {
+router.get('/dashboard',  async (req, res) => {
   try { 
      const postData = await Post.findAll({
         where: { user_id: req.session.user_id },
@@ -66,9 +64,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
     }
 })
 
-router.get('login', (req, res) => {
+router.get('/login', (req, res) => {
     if (req.session.logged_in) {
-        res.redirect('/dashboard')
+        res.redirect('homepage')
         return;
     }
     res.render('login')
@@ -79,7 +77,7 @@ router.get('/signup', (req, res) =>{
         res.redirect('/dashboard')
         return;
     }
-    res.render('/signup')
+    res.render('signup')
 })
 
 router.get('/editpost/:id', async (req, res) => {

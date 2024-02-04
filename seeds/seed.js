@@ -1,8 +1,11 @@
-import sequelize from ('../config/connection')
-import { User, Project } from ('../models')
+import sequelize from '../config/connection.js'
+import User from '../models/User.js';
+import Post from '../models/Post.js'
+import Comment from '../models/Comment.js';
 
-import userData from ('./userData.json')
-import projectData from ('./projectData.json')
+import userData from './userData.js'
+import postData from './postData.js'
+import commentData from './commentData.js'
 
 const seedDatabase = async () => {
     await sequelize.sync({ force: true })
@@ -11,11 +14,19 @@ const seedDatabase = async () => {
         individualHooks: true,
         returning: true,
     })
+    console.log(users)
 
     for (const post of postData) {
+        console.log(post)
         await Post.create({
             ...post,
-            user_id: users[Math.floor(Math.random() * users.length)].id
+            userId: users[Math.floor(Math.random() * users.length)].id
+        })
+    }
+    for (const comment of commentData) {
+        await Comment.create({
+            ...comment,
+            userId: users[Math.floor(Math.random() * users.length)].id
         })
     }
     process.exit(0)

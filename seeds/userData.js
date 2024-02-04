@@ -1,4 +1,4 @@
-import { User } from ('../models')
+import User from '../models/User.js'
 
  const userData = 
 [
@@ -19,6 +19,6 @@ import { User } from ('../models')
     }
   ];
 
-  const seedUsers = () => User.bulkCreate(userData)
+  // const seedUsers = () => User.bulkCreate(userData)
 
-  module.exports = seedUsers
+  export default userData;

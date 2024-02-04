@@ -5,7 +5,7 @@ import Post from '../../models/Post.js'
 import withAuth from '../../utils/withAuth.js';
 const router = express.Router();
 // gets all the posts by one user withAuth
-router.get('/', withAuth, async (req, res) => {
+router.get('/',  async (req, res) => {
     try {
         const allPosts = await Post.findAll({
             include: ({ model: User, attributes: ['username']}),

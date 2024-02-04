@@ -6,7 +6,7 @@ import routes from './controllers/index.js';
 
 import sequelize from './config/connection.js';
 import exphbs from 'express-handlebars';
-const hbs = exphbs.create()
+const hbs = exphbs.create({})
 
 const app = express();
 const PORT = process.env.PORT || 3001
@@ -22,21 +22,22 @@ const sess = {
 }
 
 app.use(session(sess))
+app.engine('handlebars', hbs.engine)
+app.set('view engine', 'handlebars')
+// app.get(import('./controllers/index.js'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}))
 
 app.use(express.static('public'))
-app.engine('handlebars', hbs.engine)
-app.set('view engine', 'handlebars')
 
-app.use(
-    session({
-        secret: process.env.SECRET,
-        store: new SequelizeStore({ db: sequelize}),
-        resave: false,
-        saveUninitialized: false,
-    })
-)
+// app.use(
+//     session({
+//         secret: process.env.SECRET,
+//         store: new SequelizeStore({ db: sequelize}),
+//         resave: false,
+//         saveUninitialized: false,
+//     })
+// )
 
 app.use(routes);
 sequelize.sync({ force: false}).then(()  => {

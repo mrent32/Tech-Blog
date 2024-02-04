@@ -1,4 +1,4 @@
-import { Comment} from ('../models')
+import  Comment from  '../models/Comment.js'
 
 
 const commentData = [
@@ -39,6 +39,6 @@ const commentData = [
     }
   ];
 
-  const seedComments = () => Comment.bulkCreate(commentData)
+  // const seedComments = () => Comment.bulkCreate(commentData)
 
-  module.exports = seedComments;
+export default commentData;

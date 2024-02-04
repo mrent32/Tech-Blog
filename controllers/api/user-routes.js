@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
         attributes: {exclude: ['password'] },
     })
     res.status(200).json(allUsers)
+    res.render('homepage');
     } catch (err) {
         res.status(500).json(err)
     }
