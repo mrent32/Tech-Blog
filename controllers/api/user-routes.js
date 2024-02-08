@@ -18,18 +18,18 @@ router.post('/signup', async (req, res) => {
     try {
         const newUser = await User.create({
             where: {
-                username: req.body.username,
+                name: req.body.name,
                 email: req.body.email,
                 password: req.body.password,
             },
         })
+        console.log('logging out', newUser)
         const userData = await newUser.save();
         req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.logged_in = true;
-            
+            req.session.userId = userData.id
+            req.session.logged_in = true
             res.status(200).json(userData)
-        })
+        }).then(res.render('dashboard', userData ))
     } catch (err) {
         res.status(400).json(err)
         console.log(err)

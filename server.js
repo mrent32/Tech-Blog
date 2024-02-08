@@ -11,17 +11,17 @@ const hbs = exphbs.create({})
 const app = express();
 const PORT = process.env.PORT || 3001
 
-// const sess = {
-//     secret: 'super secret secret',
-//     cookie: {},
-//     resave: false,
-//     saveUninitialized: true,
-//     store: new SequelizeStore({
-//         db: sequelize,
-//     }),
-// }
+const sess = {
+    secret: 'super secret secret',
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelize,
+    }),
+}
 
-// app.use(session(sess))
+app.use(session(sess))
 app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
 app.use(express.json());
