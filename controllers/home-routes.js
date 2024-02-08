@@ -8,12 +8,11 @@ router.get('/', async (req, res) => {
         const postData = await Post.findAll(
             { include: [ {model: User} ]}
         )
-        console.log(postData)
+        // console.log(postData)
         const posts = postData.map((post) => post.get({ plain: true}));
         // const posts = []
-        res.render('homepage', {
-            posts, 
-        })
+        console.log(posts)
+        res.render('homepage', {posts})
         
     } catch (err) {
         console.log(err)

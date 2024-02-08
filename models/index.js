@@ -1,5 +1,5 @@
 import Post from './Post.js';
-import User  from './User.js';
+import User from './User.js';
 import Comment from './Comment.js';
 
 
@@ -32,5 +32,5 @@ User.hasMany(Comment, {
     onDelete: 'CASCADE'
 })
 
-export default { User, Post, Comment }
+export { User, Post, Comment }
 

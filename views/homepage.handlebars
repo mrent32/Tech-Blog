@@ -1,16 +1,16 @@
 <main class="container mt-5">
   <h1 class="mb-4 text-white">Javascript Frameworks Blog</h1>
   <div class="row">
-    {{#each posts}}
+    {{#each posts as |post|}}
       <div class="col-md-4">
         <div class="card mb-3">
           <div class="card-header bg-warning">
             <h2 class="card-title">
-              <a href="/post/{{id}}" class="text-dark">{{title}}</a>
+              <a href="/post/{{post.id}}" class="text-dark">{{post.title}}</a>
             </h2>
           </div>
           <div class="card-body text-dark">
-            <p>Created by: {{user.username}} Date: {{format_date}}</p>
+            <p>Created by: {{post.user.name}} Date: {{post.createdAt}}</p>
           </div>
         </div>
       </div>
