@@ -1,7 +1,7 @@
 import express from 'express';
-import Comment from '../../models/Comment.js'
-import User from '../../models/User.js'
-import Post from '../../models/Post.js'
+// import Comment from '../../models/Comment.js';
+// import User from '../../models/User.js';
+import Post from '../../models/Post.js';
 import withAuth from '../../utils/withAuth.js';
 const router = express.Router();
 // gets all the posts by one user withAuth
@@ -16,7 +16,7 @@ router.get('/',  async (req, res) => {
     }
 })
 // gets one post by its id using a withAuth helper function to verify user authentication
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id',  async (req, res) => {
     try {
         const onePost = await Post.findByPk(req.params.id, {
             include: [

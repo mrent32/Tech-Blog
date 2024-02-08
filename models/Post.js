@@ -1,7 +1,7 @@
 import { Model, DataTypes } from 'sequelize'
-import sequelize from '../config/connection.js'
 
-export default class Post extends Model {}
+import sequelize from '../config/connection.js'
+class Post extends Model {}
 
 Post.init(
     {
@@ -22,13 +22,13 @@ Post.init(
                 len: [1],
             },
         },
-        // user_id: {
-        //     type: DataTypes.INTEGER,
-        //     references: {
-        //         model: "user",
-        //         key: "id",
-        //     },
-        // },
+        userId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: "user",
+                key: "id",
+            },
+        },
     },
     {
     sequelize, 
@@ -38,4 +38,4 @@ Post.init(
     modelName: "post",
     }
 )
-
+export default Post

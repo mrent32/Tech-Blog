@@ -1,6 +1,6 @@
-import User from './User.js'
-import Post from './Post.js'
-import Comment from './Comment.js'
+import Post from './Post.js';
+import User  from './User.js';
+import Comment from './Comment.js';
 
 
 
@@ -10,32 +10,27 @@ User.hasMany(Post, {
     onDelete: 'CASCADE'
 })
 
-// Post.belongsTo(User, {
-//     foreignKey: 'userId',
-//     onDelete: 'CASCADE'
-
-// })
+Post.belongsTo(User, {
+    foreignKey: 'userId',
+});
 
 Comment.belongsTo(User, {
     foreignKey: 'userId',
-    onDelete: 'CASCADE'
-})
+});
 
-// Comment.belongsTo(Post, {
-//     foreignKey: 'post_id',
-//     onDelete: 'CASCADE'
-// })
-
+Comment.belongsTo(Post, {
+    foreignKey: 'postId',
+});
 
 Post.hasMany(Comment, {
     foreignKey: 'postId',
     onDelete: 'CASCADE',  
+});
+
+User.hasMany(Comment, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE'
 })
 
-// User.hasMany(Comment, {
-//     foreignKey: 'user_id',
-//     onDelete: 'CASCADE'
-// })
-
-export default { Comment, User, Post }
+export default { User, Post, Comment }
 

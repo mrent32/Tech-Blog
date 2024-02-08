@@ -1,5 +1,5 @@
-import express from 'express'
-import Comment from '../../models/Comment.js';
+import express from 'express';
+import Comment  from '../../models/Comment.js';
 import withAuth from "../../utils/withAuth.js";
 const router = express.Router();
 router.post('/', withAuth, async (req, res) => {

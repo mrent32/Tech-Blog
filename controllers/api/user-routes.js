@@ -1,7 +1,7 @@
 import express from 'express';
-import User from '../../models/User.js'
-import withAuth from '../../utils/withAuth.js'
-const router = express.Router()
+import User from '../../models/User.js';
+import withAuth from '../../utils/withAuth.js';
+const router = express.Router();
 // route to get all users
 router.get('/', async (req, res) => {
    try { const allUsers = await User.findAll({

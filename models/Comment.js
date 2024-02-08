@@ -18,15 +18,15 @@ Comment.init(
                 len: [1],
             },
         },
-        // user_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        //     references: {
-        //         model: "user",
-        //         key: "id",
-        //     },
-        // },
-        post_id: {
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: "user",
+                key: "id",
+            },
+        },
+        postId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -44,4 +44,4 @@ Comment.init(
     }
 )
 
-export default Comment
+export default Comment 

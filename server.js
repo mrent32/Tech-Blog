@@ -11,33 +11,23 @@ const hbs = exphbs.create({})
 const app = express();
 const PORT = process.env.PORT || 3001
 
-const sess = {
-    secret: 'super secret secret',
-    cookie: {},
-    resave: false,
-    saveUninitialized: true,
-    store: new SequelizeStore({
-        db: sequelize,
-    }),
-}
+// const sess = {
+//     secret: 'super secret secret',
+//     cookie: {},
+//     resave: false,
+//     saveUninitialized: true,
+//     store: new SequelizeStore({
+//         db: sequelize,
+//     }),
+// }
 
-app.use(session(sess))
+// app.use(session(sess))
 app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
-// app.get(import('./controllers/index.js'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}))
 
 app.use(express.static('public'))
-
-// app.use(
-//     session({
-//         secret: process.env.SECRET,
-//         store: new SequelizeStore({ db: sequelize}),
-//         resave: false,
-//         saveUninitialized: false,
-//     })
-// )
 
 app.use(routes);
 sequelize.sync({ force: false}).then(()  => {

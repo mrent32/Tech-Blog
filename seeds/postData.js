@@ -1,4 +1,4 @@
-import Post from '../models/Post.js'
+
 
 const postData = [
     {
@@ -29,6 +29,6 @@ const postData = [
     }
   ];
 
-  // const seedPosts = () => Post.bulkCreate(postData)
+  
 
   export default postData;

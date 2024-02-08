@@ -1,44 +1,44 @@
-import  Comment from  '../models/Comment.js'
+
 
 
 const commentData = [
     {
       comment_text: "Great article!",
-      user_id: 1,
-      post_id: 1,
+      userId: 1,
+      postId: 1,
     },
     {
       comment_text: "I agree with you!",
-      user_id: 2,
-      post_id: 1,
+      userId: 2,
+      postId: 1,
     },
     {
       comment_text: "I disagree with you!",
-      user_id: 3,
-      post_id: 1,
+      userId: 3,
+      postId: 1,
     },
     {
       comment_text: "I agree with you!",
-      user_id: 4,
-      post_id: 1,
+      userId: 4,
+      postId: 1,
     },
     {
       comment_text: "I disagree with you!",
-      user_id: 5,
-      post_id: 1,
+      userId: 5,
+      postId: 1,
     },
     {
       comment_text: "Great article!",
-      user_id: 1,
-      post_id: 2,
+      userId: 1,
+      postId: 2,
     },
     {
       comment_text: "I agree with you!",
-      user_id: 2,
-      post_id: 2,
+      userId: 2,
+      postId: 2,
     }
   ];
 
-  // const seedComments = () => Comment.bulkCreate(commentData)
+  
 
 export default commentData;

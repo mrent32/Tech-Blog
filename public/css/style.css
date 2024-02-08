@@ -1,0 +1,9 @@
+.form-input {
+    border-radius: 3px;
+    border: 2px solid black;
+}
+#banner {
+    border: 2px solid black;
+    border-radius: 10px;
+    text-align: center;
+}

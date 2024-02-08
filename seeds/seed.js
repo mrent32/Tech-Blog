@@ -1,11 +1,13 @@
 import sequelize from '../config/connection.js'
 import User from '../models/User.js';
-import Post from '../models/Post.js'
-import Comment from '../models/Comment.js';
+import Post from '../models/Post.js';
+import Comment from '../models/Comment.js'
 
-import userData from './userData.js'
-import postData from './postData.js'
-import commentData from './commentData.js'
+
+
+import userData from './userData.js';
+import postData from './postData.js';
+import commentData from './commentData.js';
 
 const seedDatabase = async () => {
     await sequelize.sync({ force: true })
@@ -23,9 +25,11 @@ const seedDatabase = async () => {
             userId: users[Math.floor(Math.random() * users.length)].id
         })
     }
+    const posts = await Post.findAll()
     for (const comment of commentData) {
         await Comment.create({
             ...comment,
+            postId: posts[Math.floor(Math.random() * posts.length)].id,
             userId: users[Math.floor(Math.random() * users.length)].id
         })
     }

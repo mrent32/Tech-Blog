@@ -1,22 +1,20 @@
 import express from 'express';
-import Post from '../models/Post.js'
-import User from '../models/User.js'
-import Comment from '../models/Comment.js'
+import { User, Post, Comment } from '../models/index.js';
 import withAuth from "../utils/withAuth.js";
 const router = express.Router();
+
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll(
-            
+            { include: [ {model: User} ]}
         )
         console.log(postData)
         const posts = postData.map((post) => post.get({ plain: true}));
         // const posts = []
         res.render('homepage', {
-        
             posts, 
-            logged_in: req.session.logged_in
         })
+        
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
