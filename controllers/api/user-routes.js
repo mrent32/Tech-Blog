@@ -22,11 +22,10 @@ router.post('/signup', async (req, res) => {
            password: req.body.password
         })
         console.log('logging out', newUser)
-        const userData = await newUser.save();
         req.session.save(() => {
-            req.session.userId = userData.id
+            req.session.userId = newUser.id
             req.session.logged_in = true
-            res.status(200).json(userData)
+            res.status(200).json(newUser)
         })
     } catch (err) {
         res.status(400).json(err)
@@ -44,10 +43,7 @@ router.post('/login', async (req, res) => {
                 return;
              }
              const validPassword =  await userData.checkPassword(req.body.password)
-             
-            //  console.log('logging out', validPassword)
-            //  console.log('logging out', req.body.password)
-            //  console.log('logging out', userData.password)
+        
              if(!validPassword) {
                 res.status(400).json('invalid password credentials please try again')
                 return;

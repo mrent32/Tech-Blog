@@ -1,6 +1,7 @@
  <div class="post-container post mb-3">
-      <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{title}}</a></h2>
-      <p>Created by: {{user.name}} | Date: {{createdAt}}</p>
+      <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{post.title}}</a></h2>
+      <p>Created by: {{user.name}} | Date: {{createdAt}} Content: {{post.content}}</p>
       <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
+      <a href="/comment/{{id}}" class="btn btn_warning">Comment</a>
       <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete</button>
     </div>

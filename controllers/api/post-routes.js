@@ -1,6 +1,6 @@
 import express from 'express';
-// import Comment from '../../models/Comment.js';
-// import User from '../../models/User.js';
+import Comment from '../../models/Comment.js';
+import User from '../../models/User.js';
 import Post from '../../models/Post.js';
 import withAuth from '../../utils/withAuth.js';
 const router = express.Router();
@@ -40,7 +40,7 @@ router.post('/', withAuth, async (req, res) => {
     try {
         const newPost = await Post.create({
             ...req.body,
-            user_id: req.session.user_id,
+            userId: req.session.userId,
         })
         res.status(200).json(newPost)
     } catch (err) {
@@ -69,7 +69,7 @@ router.delete('/', withAuth, async (req, res) => {
             where: { id: req.params.id},
         })
         await Comment.destroy({
-            where: { post_id: req.params.id},
+            where: { postID: req.params.id},
         })
         if(!deletedPost) {
             res.status(404).json('no post with that id')

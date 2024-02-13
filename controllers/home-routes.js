@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll(
-            { include: [ {model: User} ]}
+            { include: [ {model: User, Post} ]}
         )
         
         const posts = postData.map((post) => post.get({ plain: true}));
