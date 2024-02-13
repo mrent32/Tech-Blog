@@ -4,6 +4,12 @@ import sequelize from '../config/connection.js';
 
  class User extends Model {
     checkPassword(loginPw) {
+        console.log('logging out', loginPw)
+        console.log('stored password', this.password)
+        const test = async (pw) => {
+            console.log('logging out', await bcrypt.hash(pw, 10) )
+        };
+        test(loginPw)
         return bcrypt.compareSync(loginPw, this.password);
     }
 }

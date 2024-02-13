@@ -8,20 +8,18 @@ router.get('/', async (req, res) => {
         attributes: {exclude: ['password'] },
     })
     res.status(200).json(allUsers)
-    res.render('homepage');
     } catch (err) {
         res.status(500).json(err)
     }
 })
 // allows a new user to signup to the page using the request body 
 router.post('/signup', async (req, res) => {
+    
     try {
         const newUser = await User.create({
-            where: {
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-            },
+           name: req.body.name,
+           email: req.body.email,
+           password: req.body.password
         })
         console.log('logging out', newUser)
         const userData = await newUser.save();
@@ -29,7 +27,7 @@ router.post('/signup', async (req, res) => {
             req.session.userId = userData.id
             req.session.logged_in = true
             res.status(200).json(userData)
-        }).then(res.render('dashboard', userData ))
+        })
     } catch (err) {
         res.status(400).json(err)
         console.log(err)
@@ -39,24 +37,26 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const userData = await User.findOne({
-             where: { username: req.body.username } });
+             where: { email: req.body.email } });
 
              if(!userData) {
-                res.status(404).json('invalid credentials please try again')
+                res.status(404).json('invalid user credentials please try again')
                 return;
              }
-             const validPassword = userData.checkPassword(req.body.password)
-
+             const validPassword =  await userData.checkPassword(req.body.password)
+             
+            //  console.log('logging out', validPassword)
+            //  console.log('logging out', req.body.password)
+            //  console.log('logging out', userData.password)
              if(!validPassword) {
-                res.status(400).json('invalid credentials please try again')
+                res.status(400).json('invalid password credentials please try again')
                 return;
              }
              req.session.save(() => {
-                req.session.user_id = userData.id;
+                req.session.userId = userData.id;
                 req.session.logged_in = true;
+                res.status(200).json({ user: userData, message: 'successfully logged in!'})
              })
-             res.status(200).json({ user: userData, message: 'successfully logged in!'})
-             res.render('login')
     }   catch (err) {
         res.status(400).json(err)
     }

@@ -7,10 +7,10 @@
   </div>
   <br>
   <h1 class="mb-4">Javascript Frameworks Library Contributions:</h1>
-  {{#each posts}}
+  {{#each posts as |post|}}
     <div class="post-container post mb-3">
-      <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{title}}</a></h2>
-      <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
+      <h2><a href="/post/{{post.id}}" class="text-decoration-none text-reset">{{post.title}}</a></h2>
+      <p>Created by: {{post.user.name}} | Date: {{post.createdAt}}</p>
       <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
       <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete</button>
     </div>

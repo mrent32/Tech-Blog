@@ -1,12 +1,13 @@
 import express from 'express';
 import session from 'express-session';
 import sequelizeStore from 'connect-session-sequelize';
-const SequelizeStore = sequelizeStore(session.Store)
+const SequelizeStore = sequelizeStore(session.Store);
 import routes from './controllers/index.js';
 
 import sequelize from './config/connection.js';
 import exphbs from 'express-handlebars';
-const hbs = exphbs.create({})
+import helpers from './utils/helpers.js';
+const hbs = exphbs.create({helpers})
 
 const app = express();
 const PORT = process.env.PORT || 3001
