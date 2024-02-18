@@ -1,14 +1,14 @@
 import express from 'express';
-import Comment from '../../models/Comment.js';
-import User from '../../models/User.js';
-import Post from '../../models/Post.js';
+import {Comment, User, Post}  from '../../models/index.js';
 import withAuth from '../../utils/withAuth.js';
 const router = express.Router();
 // gets all the posts by one user withAuth
 router.get('/',  async (req, res) => {
     try {
         const allPosts = await Post.findAll({
-            include: ({ model: User, attributes: ['username']}),
+            include: [User, Comment ]
+            // include: ({ model: User, attributes: ['name']}),
+            
         })
         res.status(200).json(allPosts)
     } catch (err) {
@@ -20,9 +20,9 @@ router.get('/:id',  async (req, res) => {
     try {
         const onePost = await Post.findByPk(req.params.id, {
             include: [
-                { model: User, attributes: ['username' ]},
+                { model: User, attributes: ['name' ]},
                 { model: Comment,
-                    include: [{ model: User, attributes: ['username' ]}],
+                    include: [{ model: User, attributes: ['name' ]}],
                 },
             ],
         })
@@ -63,18 +63,19 @@ router.put('/', withAuth, async (req, res) => {
     }
 })
 // deletes a single post by one user along with all its comments using withAuth and the post id
-router.delete('/', withAuth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const deletedPost = await Post.destroy({
             where: { id: req.params.id},
         })
-        await Comment.destroy({
-            where: { postID: req.params.id},
-        })
-        if(!deletedPost) {
-            res.status(404).json('no post with that id')
-            return;
-        }  res.status(200).json(deletedPost)
+        // await Comment.destroy({
+        //     where: { postId: req.params.id},
+        // })
+        // if(!deletedPost) {
+        //     res.status(404).json('no post with that id')
+        //     return;
+        // }  res.status(200).json(deletedPost)
+        res.json(deletedPost)
     } catch(err) {
         res.status(500).json(err)
     }

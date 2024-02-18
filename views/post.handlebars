@@ -1,7 +1,21 @@
  <div class="post-container post mb-3">
-      <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{post.title}}</a></h2>
-      <p>Created by: {{user.name}} | Date: {{createdAt}} Content: {{post.content}}</p>
+      <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{title}}</a></h2>
+      <p>Created by: {{user.name}} | Date: {{createdAt}} Content: {{content}}</p>
       <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
-      <a href="/comment/{{id}}" class="btn btn_warning">Comment</a>
-      <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete</button>
+      <form class="form" id="comment-form" data-post-id="{{id}}">
+         <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea class="form-input" type="text" id="comment" name="comment"></textarea>
+        <button type="submit" id="comment-btn">Comment</button>
+      </div>
+      </form>
+      <button id="delete" class="btn btn-danger delete-post" data-post-id="{{id}}">Delete</button>
+      {{#each comments as |comment|}}
+      <div class="card">
+        <p>{{comment.comment_text}}</p>
+        <p>by:{{comment.user.name}}</p>
+      </div>
+      {{/each}}
     </div>
+    <script src="../js/comment.js"></script>
+    <script src="../js/delete.js"></script>

@@ -1,11 +1,12 @@
 import express from 'express';
-import User from '../../models/User.js';
+import {User, Post}  from '../../models/index.js';
 import withAuth from '../../utils/withAuth.js';
 const router = express.Router();
 // route to get all users
 router.get('/', async (req, res) => {
    try { const allUsers = await User.findAll({
         attributes: {exclude: ['password'] },
+        include: [Post]
     })
     res.status(200).json(allUsers)
     } catch (err) {
