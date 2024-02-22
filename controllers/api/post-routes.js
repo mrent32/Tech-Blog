@@ -39,9 +39,10 @@ router.get('/:id',  async (req, res) => {
 router.post('/', withAuth, async (req, res) => {
     try {
         const newPost = await Post.create({
-            ...req.body,
-            userId: req.session.userId,
+           content: req.body.post_text, userId: req.session.userId,
+           title: req.body.post_title
         })
+        console.log(newPost)
         res.status(200).json(newPost)
     } catch (err) {
         res.status(400).json(err)
@@ -68,13 +69,6 @@ router.delete('/:id', async (req, res) => {
         const deletedPost = await Post.destroy({
             where: { id: req.params.id},
         })
-        // await Comment.destroy({
-        //     where: { postId: req.params.id},
-        // })
-        // if(!deletedPost) {
-        //     res.status(404).json('no post with that id')
-        //     return;
-        // }  res.status(200).json(deletedPost)
         res.json(deletedPost)
     } catch(err) {
         res.status(500).json(err)

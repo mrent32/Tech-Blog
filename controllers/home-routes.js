@@ -84,15 +84,15 @@ router.get('/editpost/:id', async (req, res) => {
         const postData = await Post.findByPk(req.params.id, {
             include: [
                 { model: User,
-                    attributes: ['username'],
+                    attributes: ['email'],
                 },
                 { model: Comment,
-                include: [{ model: User, attributes: ['username']}]},
+                include: [{ model: User, attributes: ['email']}]},
             ],
         })
         const post = postData.get({ plain: true})
 
-        res.render('editpost', {
+        res.render('edit-post', {
             ...post,
             logged_in: req.session.logged_in,
         })

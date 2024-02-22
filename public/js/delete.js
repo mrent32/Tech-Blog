@@ -8,7 +8,7 @@ document.getElementById('delete').addEventListener('click', async function(){
                 headers: { 'Content-Type': 'application/json' },
               });
               if(response.ok) {
-                document.location.replace('/post/' + postId)
+                document.location.replace('/dashboard/' )
               }
         } catch (err) {
             console.log('error')
